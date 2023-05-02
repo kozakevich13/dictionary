@@ -2,50 +2,45 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const CheckWords = () => {
-  const [selectedWord, setSelectedWord] = useState("");
+  const [selectedWordIndex, setSelectedWordIndex] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
+  const [usedWords, setUsedWords] = useState([]);
   const dictionary = useSelector((state) => state.words);
   const testWords = dictionary.slice(0, 10);
 
   useEffect(() => {
-    if (testWords.length > 0) {
-      setSelectedWord(testWords[0].word);
-      const options = generateOptions(testWords[0], dictionary);
-      setSelectedOptions(options);
-      setSelectedOption("");
-    }
-  }, [dictionary]);
+    const selectedWordObj = testWords[selectedWordIndex];
+    const options = generateOptions(selectedWordObj, dictionary, usedWords);
+    setSelectedOptions(options);
+    setSelectedOption("");
+  }, [selectedWordIndex]);
 
   const handleSelectOption = (event) => {
     setSelectedOption(event.target.value);
   };
 
   const handleCheckAnswer = () => {
-    const selectedWordObj = dictionary.find((wordObj) => wordObj.word === selectedWord);
+    const selectedWordObj = testWords[selectedWordIndex];
     if (selectedWordObj && selectedWordObj.translation === selectedOption) {
       alert("Correct!");
     } else {
       alert("Incorrect!");
     }
-    setSelectedWord(testWords[Math.floor(Math.random() * testWords.length)].word);
-    const options = generateOptions(dictionary.find((wordObj) => wordObj.word === selectedWord), dictionary);
-    setSelectedOptions(options);
+    setSelectedOptions([]);
     setSelectedOption("");
+    setUsedWords([...usedWords, selectedWordObj.word]);
+    setSelectedWordIndex(selectedWordIndex + 1);
   };
 
-  const generateOptions = (wordObj, dictionary) => {
+  const generateOptions = (wordObj, dictionary, usedWords) => {
     const options = [wordObj.translation];
-    const availableTranslations = dictionary
-      .map((wordObj) => wordObj.translation)
-      .filter((translation) => translation !== wordObj.translation);
-  
-    for (let i = 0; i < 3; i++) {
-      const randomTranslation = availableTranslations[Math.floor(Math.random() * availableTranslations.length)];
-      options.push(randomTranslation);
-      availableTranslations.splice(availableTranslations.indexOf(randomTranslation), 1);
+    while (options.length < 4) {
+      const randomWordObj = dictionary[Math.floor(Math.random() * dictionary.length)];
+      if (randomWordObj.word !== wordObj.word && !options.includes(randomWordObj.translation) && !usedWords.includes(randomWordObj.word)) {
+        options.push(randomWordObj.translation);
+      }
     }
-    
     return shuffle(options);
   };
 
@@ -61,7 +56,8 @@ const CheckWords = () => {
   return (
     <div>
       <h1>Test Your Vocabulary</h1>
-      <p>{selectedWord}</p>
+      <p>Translate the following word:</p>
+      <h2>{testWords[selectedWordIndex].word}</h2>
       <div>
         {selectedOptions.map((option) => (
           <label key={option}>
