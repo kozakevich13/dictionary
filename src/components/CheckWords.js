@@ -8,6 +8,8 @@ const CheckWords = () => {
   const [usedWords, setUsedWords] = useState([]);
   const dictionary = useSelector((state) => state.words);
   const testWords = dictionary.slice(0, 10);
+  const [numCorrectAnswers, setNumCorrectAnswers] = useState(0);
+  const numQuestions = testWords.length; // Загальна кількість питань тесту
 
   useEffect(() => {
     const selectedWordObj = testWords[selectedWordIndex];
@@ -24,6 +26,7 @@ const CheckWords = () => {
     const selectedWordObj = testWords[selectedWordIndex];
     if (selectedWordObj && selectedWordObj.translation === selectedOption) {
       alert("Correct!");
+      setNumCorrectAnswers(numCorrectAnswers + 1);
     } else {
       alert("Incorrect!");
     }
@@ -57,6 +60,11 @@ const CheckWords = () => {
     }
     return shuffledArray;
   };
+
+  const percentageCorrect = numCorrectAnswers / numQuestions * 100;
+
+  console.log(percentageCorrect)
+  console.log(testWords)
 
   return (
     <div>
