@@ -10,6 +10,7 @@ const CheckWords = () => {
   const testWords = dictionary.slice(0, 10);
   const [numCorrectAnswers, setNumCorrectAnswers] = useState(0);
   const numQuestions = testWords.length; // Загальна кількість питань тесту
+  const [isTestFinished, setIsTestFinished] = useState(false)
 
   useEffect(() => {
     const selectedWordObj = testWords[selectedWordIndex];
@@ -17,6 +18,26 @@ const CheckWords = () => {
     setSelectedOptions(options);
     setSelectedOption("");
   }, [selectedWordIndex]);
+
+  useEffect(() => {
+    if (selectedWordIndex === testWords.length) {
+      setSelectedOptions([]);
+      setSelectedOption("");
+    } else {
+      const selectedWordObj = testWords[selectedWordIndex];
+      const options = generateOptions(selectedWordObj, dictionary, usedWords);
+      setSelectedOptions(options);
+      setSelectedOption("");
+    }
+  }, [selectedWordIndex]);
+
+  useEffect(() => {
+    if (isTestFinished) {
+      const selectedWordObj = testWords[testWords.length - 1];
+      const options = generateOptions(selectedWordObj, dictionary, usedWords);
+      setSelectedOptions(options);
+    }
+  }, [isTestFinished]);
 
   const handleSelectOption = (event) => {
     setSelectedOption(event.target.value);
@@ -33,10 +54,11 @@ const CheckWords = () => {
     setSelectedOptions([]);
     setSelectedOption("");
     setUsedWords([...usedWords, selectedWordObj.word]);
+  
     if (selectedWordIndex < testWords.length - 1) {
       setSelectedWordIndex(selectedWordIndex + 1);
     } else {
-      alert("You have completed the test!");
+      setIsTestFinished(true); // set isTestFinished to true if the last question is answered
     }
   };
 
@@ -71,41 +93,35 @@ const CheckWords = () => {
   console.log(numQuestions);
 
   const handleRestartTest = () => {
-    setNumCorrectAnswers(0);
     setSelectedWordIndex(0);
+    setSelectedOptions([]);
+    setSelectedOption("");
     setUsedWords([]);
+    setNumCorrectAnswers(0);
+    setIsTestFinished(false)
   };
 
   return (
     <div>
-      {selectedWordIndex < numQuestions ? (
-        <>
-          <h1>Test Your Vocabulary</h1>
-          <p>Translate the following word:</p>
-          <h2>{testWords[selectedWordIndex].word}</h2>
-          <div>
-            {selectedOptions.map((option) => (
-              <label key={option}>
-                <input
-                  type="radio"
-                  name="options"
-                  value={option}
-                  checked={selectedOption === option}
-                  onChange={handleSelectOption}
-                />
-                {option}
-              </label>
-            ))}
-          </div>
-          <button onClick={handleCheckAnswer}>Check</button>
-        </>
-      ) : (
-        <>
-          <h1>Your score: {percentageCorrect}%</h1>
-          <button onClick={handleRestartTest}>Restart Test</button>
-        </>
-      )}
+    <h1>Test Your Vocabulary</h1>
+    <p>Translate the following word:</p>
+    <h2>{testWords[selectedWordIndex].word}</h2>
+    <div>
+      {selectedOptions.map((option) => (
+        <label key={option}>
+          <input type="radio" name="options" value={option} checked={selectedOption === option} onChange={handleSelectOption} />
+          {option}
+        </label>
+      ))}
     </div>
+    <button onClick={handleCheckAnswer}>Check</button>
+    {isTestFinished && (
+  <div>
+    <h3>Your score: {percentageCorrect.toFixed(2)}%</h3>
+    <button onClick={handleRestartTest}>Restart Test</button>
+  </div>
+)}
+  </div>
   );
 };
 
