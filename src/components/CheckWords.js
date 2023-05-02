@@ -33,15 +33,20 @@ const CheckWords = () => {
     setSelectedWordIndex(selectedWordIndex + 1);
   };
 
-  const generateOptions = (wordObj, dictionary, usedWords) => {
-    const options = [wordObj.translation];
-    while (options.length < 4) {
+  const generateOptions = (wordObj, dictionary) => {
+    const optionsList = [];
+    dictionary.forEach((item) => {
+      if (item.word == wordObj.word) {
+        optionsList.push(item.translation);
+      }
+    });
+    while (optionsList.length < 4) {
       const randomWordObj = dictionary[Math.floor(Math.random() * dictionary.length)];
-      if (randomWordObj.word !== wordObj.word && !options.includes(randomWordObj.translation) && !usedWords.includes(randomWordObj.word)) {
-        options.push(randomWordObj.translation);
+      if (randomWordObj.word !== wordObj.word && !optionsList.includes(randomWordObj.translation)) {
+        optionsList.push(randomWordObj.translation);
       }
     }
-    return shuffle(options);
+    return shuffle(optionsList).slice(0, 4);
   };
 
   const shuffle = (array) => {
