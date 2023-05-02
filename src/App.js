@@ -4,13 +4,20 @@ import Dictionary from './components/Dictionary';
 import { legacy_createStore as createStore } from 'redux';
 import { Provider } from "react-redux";
 import dictionaryReducer from "./reducers/redusers";
+import CheckWords from "./components/CheckWords"
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 const store = createStore(dictionaryReducer);
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <Dictionary/>
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<Dictionary/>} />
+            <Route exact path="/check-words" element={<CheckWords/>} />
+          </Routes>
+        </Router>
       </Provider>
     </div>
   );
