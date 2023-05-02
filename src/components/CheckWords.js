@@ -67,23 +67,44 @@ const CheckWords = () => {
 
   const percentageCorrect = numCorrectAnswers / numQuestions * 100;
 
-  console.log(percentageCorrect);
-  console.log(testWords);
+  console.log(selectedWordIndex);
+  console.log(numQuestions);
+
+  const handleRestartTest = () => {
+    setNumCorrectAnswers(0);
+    setSelectedWordIndex(0);
+    setUsedWords([]);
+  };
 
   return (
     <div>
-      <h1>Test Your Vocabulary</h1>
-      <p>Translate the following word:</p>
-      <h2>{testWords[selectedWordIndex].word}</h2>
-      <div>
-        {selectedOptions.map((option) => (
-          <label key={option}>
-            <input type="radio" name="options" value={option} checked={selectedOption === option} onChange={handleSelectOption} />
-            {option}
-          </label>
-        ))}
-      </div>
-      <button onClick={handleCheckAnswer}>Check</button>
+      {selectedWordIndex < numQuestions ? (
+        <>
+          <h1>Test Your Vocabulary</h1>
+          <p>Translate the following word:</p>
+          <h2>{testWords[selectedWordIndex].word}</h2>
+          <div>
+            {selectedOptions.map((option) => (
+              <label key={option}>
+                <input
+                  type="radio"
+                  name="options"
+                  value={option}
+                  checked={selectedOption === option}
+                  onChange={handleSelectOption}
+                />
+                {option}
+              </label>
+            ))}
+          </div>
+          <button onClick={handleCheckAnswer}>Check</button>
+        </>
+      ) : (
+        <>
+          <h1>Your score: {percentageCorrect}%</h1>
+          <button onClick={handleRestartTest}>Restart Test</button>
+        </>
+      )}
     </div>
   );
 };
