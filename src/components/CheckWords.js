@@ -33,7 +33,11 @@ const CheckWords = () => {
     setSelectedOptions([]);
     setSelectedOption("");
     setUsedWords([...usedWords, selectedWordObj.word]);
-    setSelectedWordIndex(selectedWordIndex + 1);
+    if (selectedWordIndex < testWords.length - 1) {
+      setSelectedWordIndex(selectedWordIndex + 1);
+    } else {
+      alert("You have completed the test!");
+    }
   };
 
   const generateOptions = (wordObj, dictionary) => {
@@ -63,8 +67,8 @@ const CheckWords = () => {
 
   const percentageCorrect = numCorrectAnswers / numQuestions * 100;
 
-  console.log(percentageCorrect)
-  console.log(testWords)
+  console.log(percentageCorrect);
+  console.log(testWords);
 
   return (
     <div>
