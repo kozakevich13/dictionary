@@ -10,7 +10,7 @@ const CheckWords = () => {
   const dictionary = useSelector((state) => state.words);
   const [testWords, setTestWords] = useState(dictionary.slice(0, 10));
   const [numCorrectAnswers, setNumCorrectAnswers] = useState(0);
-  const numQuestions = testWords.length; // Загальна кількість питань тесту
+  const numQuestions = testWords.length; 
   const [isTestFinished, setIsTestFinished] = useState(false)
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const CheckWords = () => {
     if (selectedWordIndex < testWords.length - 1) {
       setSelectedWordIndex(selectedWordIndex + 1);
     } else {
-      setIsTestFinished(true); // set isTestFinished to true if the last question is answered
+      setIsTestFinished(true);
     }
   };
 
@@ -83,15 +83,6 @@ const CheckWords = () => {
     return shuffle(optionsList).slice(0, 4);
   };
 
-  // const shuffle = (array) => {
-  //   const shuffledArray = [...array];
-  //   for (let i = shuffledArray.length - 1; i > 0; i--) {
-  //     const j = Math.floor(Math.random() * (i + 1));
-  //     [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-  //   }
-  //   return shuffledArray;
-  // };
-
   const percentageCorrect = numCorrectAnswers / numQuestions * 100;
 
   console.log(selectedWordIndex);
@@ -108,24 +99,24 @@ const CheckWords = () => {
 
   return (
     <div>
-    <h1>Test Your Vocabulary</h1>
-    <p>Translate the following word:</p>
-    <h2>{testWords[selectedWordIndex].word}</h2>
-    <div>
-      {selectedOptions.map((option) => (
-        <label key={option}>
-          <input type="radio" name="options" value={option} checked={selectedOption === option} onChange={handleSelectOption} />
-          {option}
-        </label>
-      ))}
-    </div>
+     <h1>Test Your Vocabulary</h1>
+     <p>Translate the following word:</p>
+     <h2>{testWords[selectedWordIndex].word}</h2>
+      <div>
+        {selectedOptions.map((option) => (
+          <label key={option}>
+            <input type="radio" name="options" value={option} checked={selectedOption === option} onChange={handleSelectOption} />
+            {option}
+          </label>
+        ))}
+      </div>
     <button onClick={handleCheckAnswer}>Check</button>
     {isTestFinished && (
-  <div>
-    <h3>Your score: {percentageCorrect.toFixed(2)}%</h3>
-    <button onClick={handleRestartTest}>Restart Test</button>
-  </div>
-)}
+        <>
+          <h3>Your score: {percentageCorrect.toFixed(2)}%</h3>
+          <button onClick={handleRestartTest}>Restart Test</button>
+        </>
+    )}
   </div>
   );
 };
