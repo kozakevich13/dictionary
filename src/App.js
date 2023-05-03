@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import Dictionary from './components/Dictionary';
+import Dictionary from './pages/Dictionary';
 import { legacy_createStore as createStore } from 'redux';
 import { Provider } from "react-redux";
 import dictionaryReducer from "./reducers/redusers";
-import CheckWords from "./components/CheckWords"
+import CheckWords from "./pages/CheckWords"
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 const store = createStore(dictionaryReducer);
