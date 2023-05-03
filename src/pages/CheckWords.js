@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { shuffle } from "../components/shuffle";
+import { Link } from "react-router-dom";
 
 const CheckWords = () => {
   const [selectedWordIndex, setSelectedWordIndex] = useState(0);
@@ -99,6 +100,7 @@ const CheckWords = () => {
 
   return (
     <div>
+     <Link to="/">Back to Dictionary</Link>
      <h1>Test Your Vocabulary</h1>
      <p>Translate the following word:</p>
      <h2>{testWords[selectedWordIndex].word}</h2>
