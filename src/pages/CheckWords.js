@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { shuffle } from "../components/shuffle";
 
 const CheckWords = () => {
   const [selectedWordIndex, setSelectedWordIndex] = useState(0);
@@ -7,17 +8,21 @@ const CheckWords = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [usedWords, setUsedWords] = useState([]);
   const dictionary = useSelector((state) => state.words);
-  const testWords = dictionary.slice(0, 10);
+  const [testWords, setTestWords] = useState(dictionary.slice(0, 10));
   const [numCorrectAnswers, setNumCorrectAnswers] = useState(0);
   const numQuestions = testWords.length; // Загальна кількість питань тесту
   const [isTestFinished, setIsTestFinished] = useState(false)
 
+  useEffect(() => {
+    setTestWords(shuffle(dictionary.slice(0, 10)))
+  }, []);
   useEffect(() => {
     const selectedWordObj = testWords[selectedWordIndex];
     const options = generateOptions(selectedWordObj, dictionary, usedWords);
     setSelectedOptions(options);
     setSelectedOption("");
   }, [selectedWordIndex]);
+
 
   useEffect(() => {
     if (selectedWordIndex === testWords.length) {
@@ -78,14 +83,14 @@ const CheckWords = () => {
     return shuffle(optionsList).slice(0, 4);
   };
 
-  const shuffle = (array) => {
-    const shuffledArray = [...array];
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-    }
-    return shuffledArray;
-  };
+  // const shuffle = (array) => {
+  //   const shuffledArray = [...array];
+  //   for (let i = shuffledArray.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  //   }
+  //   return shuffledArray;
+  // };
 
   const percentageCorrect = numCorrectAnswers / numQuestions * 100;
 
