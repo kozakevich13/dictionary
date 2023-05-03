@@ -1,0 +1,68 @@
+.dictionary-container {
+    font-family: Arial, sans-serif;
+    width: 80%;
+    margin: 0 auto;
+}
+  
+.dictionary-heading {
+    font-size: 2rem;
+    text-align: center;
+}
+  
+.add-word-link,
+.check-words-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    border: solid 2px;
+    border-color: #64ffda;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+.add-word-link:hover,
+.check-words-link:hover {
+    border-color: white;
+}
+
+.add-word-link:active,
+.check-words-link:active {
+    background-color: #64ffda;
+}
+
+.word-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.word-item {
+    margin-bottom: 1rem;
+}
+/* #f44336 */
+.remove-word-button {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    border: solid 2px;
+    border-color: #f44336;
+    background-color: #0a192f;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.remove-word-button:hover {
+    border-color: red;
+}
+
+.check-words-link {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.not-enough-words-message {
+    color: red;
+}
