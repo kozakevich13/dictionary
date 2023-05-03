@@ -16,6 +16,11 @@ const Dictionary = () => {
     <div className="dictionary-container"> 
       <h1 className="dictionary-heading">Dictionary</h1>
       <Link to="/add-word" className="add-word-link">Add Word</Link>
+      {dictionary.length >= 4 ? (
+        <Link to="/check-words" className="check-words-link">Check Words</Link>
+      ) : (
+        <span className="not-enough-words-message">There must be at least 4 words to check</span>
+      )}
       <ul className="word-list">
         {dictionary.map((wordObj) => (
           <li key={wordObj.word} className="word-item">
@@ -26,11 +31,6 @@ const Dictionary = () => {
           </li>
         ))}
       </ul>
-      {dictionary.length >= 4 ? (
-        <Link to="/check-words" className="check-words-link">Check Words</Link>
-      ) : (
-        <span className="not-enough-words-message">There must be at least 4 words to check</span>
-      )}
     </div>
   );
 };
