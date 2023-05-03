@@ -123,7 +123,7 @@ const CheckWords = () => {
               </>
           )}
        </div>
-     <Link className="link-back" to="/">Back to Dictionary</Link>
+     <Link className="link-back" to="/dictionary">Back to Dictionary</Link>
     </div>
   );
 };

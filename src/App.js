@@ -15,7 +15,7 @@ function App() {
       <Provider store={store}>
         <Router>
           <Routes>
-            <Route exact path="/" element={<Dictionary/>} />
+            <Route exact path="/dictionary" element={<Dictionary/>} />
             <Route exact path="/check-words" element={<CheckWords/>} />
             <Route exact path="/add-word" element={<AddWord/>} />
 
