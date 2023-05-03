@@ -39,7 +39,7 @@ const AddWord = () => {
         className="add-word-input"
       />
       <button onClick={handleAddWord} className="add-word-button">Add Word</button>
-      <Link className="btn-back" to="/">Back to Dictionary</Link>
+      <Link className="link-back" to="/">Back to Dictionary</Link>
     </div>
   );
 };

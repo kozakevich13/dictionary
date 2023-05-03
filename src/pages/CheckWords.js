@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { shuffle } from "../components/shuffle";
 import { Link } from "react-router-dom";
+import "../styles/CheckWords.css"
 
 const CheckWords = () => {
   const [selectedWordIndex, setSelectedWordIndex] = useState(0);
@@ -99,27 +100,29 @@ const CheckWords = () => {
   };
 
   return (
-    <div>
-     <Link to="/">Back to Dictionary</Link>
-     <h1>Test Your Vocabulary</h1>
-     <p>Translate the following word:</p>
-     <h2>{testWords[selectedWordIndex].word}</h2>
+    <div className="check-word-container">
       <div>
-        {selectedOptions.map((option) => (
-          <label key={option}>
-            <input type="radio" name="options" value={option} checked={selectedOption === option} onChange={handleSelectOption} />
-            {option}
-          </label>
-        ))}
-      </div>
-    <button onClick={handleCheckAnswer}>Check</button>
-    {isTestFinished && (
-        <>
-          <h3>Your score: {percentageCorrect.toFixed(2)}%</h3>
-          <button onClick={handleRestartTest}>Restart Test</button>
-        </>
-    )}
-  </div>
+        <h1>Test Your Vocabulary</h1>
+        <p>Translate the following word:</p>
+        <h2>{testWords[selectedWordIndex].word}</h2>
+          <div>
+            {selectedOptions.map((option) => (
+              <label key={option}>
+                <input type="radio" name="options" value={option} checked={selectedOption === option} onChange={handleSelectOption} />
+                {option}
+              </label>
+            ))}
+          </div>
+        <button className="btn" onClick={handleCheckAnswer}>Check</button>
+          {isTestFinished && (
+              <>
+                <h3>Your score: {percentageCorrect.toFixed(2)}%</h3>
+                <button className="btn" onClick={handleRestartTest}>Restart Test</button>
+              </>
+          )}
+       </div>
+     <Link className="link-back" to="/">Back to Dictionary</Link>
+    </div>
   );
 };
 

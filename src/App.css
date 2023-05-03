@@ -6,6 +6,45 @@ body {
   text-align: center;
 }
 
+.link-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin-top: 20px;
+  margin-bottom: 1rem;
+  border: solid 2px;
+  border-color: #64ffda;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  background-color: #0a192f;
+  cursor: pointer;
+}
+
+.link-back:hover {
+  border-color: white;
+}
+
+
+.btn {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: solid 2px;
+  border-color: #64ffda;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  background-color: #0a192f;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: white;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
