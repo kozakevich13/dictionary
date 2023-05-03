@@ -46,10 +46,9 @@ const CheckWords = () => {
     }
   }, [isTestFinished]);
 
-  const handleSelectOption = (event) => {
-    setSelectedOption(event.target.value);
+  const handleSelectOption = (option) => {
+    setSelectedOption(option);
   };
-
   const handleCheckAnswer = () => {
     const selectedWordObj = testWords[selectedWordIndex];
     if (selectedWordObj && selectedWordObj.translation === selectedOption) {
@@ -105,14 +104,17 @@ const CheckWords = () => {
         <h1>Test Your Vocabulary</h1>
         <p>Translate the following word:</p>
         <h2>{testWords[selectedWordIndex].word}</h2>
-          <div>
-            {selectedOptions.map((option) => (
-              <label key={option}>
-                <input type="radio" name="options" value={option} checked={selectedOption === option} onChange={handleSelectOption} />
-                {option}
-              </label>
-            ))}
-          </div>
+        <div className="option-container">
+          {selectedOptions.map((option) => (
+            <button 
+              key={option} 
+              className={`option-button ${selectedOption === option ? "selected" : ""}`} 
+              onClick={() => handleSelectOption(option)}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
         <button className="btn" onClick={handleCheckAnswer}>Check</button>
           {isTestFinished && (
               <>

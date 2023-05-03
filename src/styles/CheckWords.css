@@ -3,4 +3,27 @@
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
-  }
+}
+.option-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+.option-button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    background-color: #0a192f;
+    cursor: pointer;
+    color: #f2f2f2;
+    border: solid 2px wheat;
+    border-radius: 0.25rem;
+    min-width: 200px;
+    text-align: center;
+}
+
+.selected {
+    border-color: #4CAF50;
+    color: white;
+}
