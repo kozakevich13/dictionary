@@ -1,0 +1,30 @@
+.add-word-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .add-word-input {
+    margin: 10px;
+    padding: 5px;
+    width: 300px;
+    font-size: 16px;
+  }
+  
+  .add-word-button {
+    margin-bottom: 1rem;
+    border: solid 2px;
+    border-color: #64ffda;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    background-color: #0a192f;
+    cursor: pointer;
+  }
+  
+  .add-word-button:hover {
+    border-color: white;
+  }
+  

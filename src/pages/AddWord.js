@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addWord } from "../actions/actions";
 import { useNavigate } from 'react-router-dom';
+import "../styles/AddWord.css";
 
 const AddWord = () => {
   const [inputValue, setInputValue] = useState("");
@@ -20,19 +21,23 @@ const AddWord = () => {
   };
 
   return (
-    <div>
+    <div className="add-word-container">
       <h1>Add Word</h1>
       <input
         type="text"
+        placeholder="Enter a word"
         value={inputValue}
         onChange={(event) => setInputValue(event.target.value)}
+        className="add-word-input"
       />
       <input
         type="text"
+        placeholder="Enter the translation"
         value={inputTranslationValue}
         onChange={(event) => setInputTranslationValue(event.target.value)}
+        className="add-word-input"
       />
-      <button onClick={handleAddWord}>Add Word</button>
+      <button onClick={handleAddWord} className="add-word-button">Add Word</button>
     </div>
   );
 };
