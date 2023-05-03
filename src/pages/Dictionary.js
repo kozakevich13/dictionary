@@ -1,5 +1,3 @@
-// src/components/Dictionary.js
-
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeWord } from "../actions/actions";
@@ -16,7 +14,6 @@ const Dictionary = () => {
   return (
     <div>
       <h1>Dictionary</h1>
-      <Link to="/check-words">Check Words</Link>
       <Link to="/add-word">Add Word</Link>
       <ul>
         {dictionary.map((wordObj) => (
@@ -28,6 +25,11 @@ const Dictionary = () => {
           </li>
         ))}
       </ul>
+      {dictionary.length >= 4 ? (
+        <Link to="/check-words">Check Words</Link>
+      ) : (
+        <span>There must be at least 4 words to check</span>
+      )}
     </div>
   );
 };
