@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addWord } from "../actions/actions";
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "../styles/AddWord.css";
 
 const AddWord = () => {
@@ -38,6 +39,7 @@ const AddWord = () => {
         className="add-word-input"
       />
       <button onClick={handleAddWord} className="add-word-button">Add Word</button>
+      <Link className="btn-back" to="/">Back to Dictionary</Link>
     </div>
   );
 };
