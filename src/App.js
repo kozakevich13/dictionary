@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import dictionaryReducer from "./reducers/redusers";
 import CheckWords from "./pages/CheckWords"
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import AddWord from './pages/AddWord';
 
 const store = createStore(dictionaryReducer);
 function App() {
@@ -16,6 +17,8 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Dictionary/>} />
             <Route exact path="/check-words" element={<CheckWords/>} />
+            <Route exact path="/add-word" element={<AddWord/>} />
+
           </Routes>
         </Router>
       </Provider>
